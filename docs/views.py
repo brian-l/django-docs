@@ -1,8 +1,13 @@
 from django.views.generic import RedirectView
 
 try:
+    exception = ModuleNotFoundError
+except NameError:
+    exception = ImportError
+
+try:
     from django.core.urlresolvers import reverse
-except ModuleNotFoundError:
+except exception:
     from django.urls import reverse
 
 from django.views.static import serve
